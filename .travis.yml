@@ -1,6 +1,6 @@
 language: python 
 python:
-- "3.7" 
+- "2.7" 
 - "3.6"
 branches:
     only:
@@ -9,11 +9,19 @@ services:
 - postgresql
 env: 
 - DJANGO=2.0 DB=postgres
+- DJANGO=1.11 DB=postgres
+matrix:
+    exclude:
+     - python: "2.7"
+       env: DJANGO=2.0 DB=postgres
+     - python: "3.6"
+       env: DJANGO=1.11 DB=postgres
 global:
 - PGPORT=5432
 before_install: 
 - cd decide
 install: 
+- pip install -q Django==$DJANGO
 - pip install -r ../requirements.txt
 before_script: 
 - cp local_settings.example.py local_settings.py
