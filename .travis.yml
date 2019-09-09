@@ -1,6 +1,6 @@
 language: python 
 python:
-- "2.7" 
+- "3.7" 
 - "3.6"
 branches:
     only:
@@ -8,16 +8,13 @@ branches:
 services:
 - postgresql
 env: 
-- DJANGO_VERSION=2.0 DB=postgres
-- DJANGO_VERSION=1.11 DB=postgres
+- DJANGO=2.0 DB=postgres
 global:
 - PGPORT=5432
 before_install: 
 - cd decide
 install: 
 - pip install -r ../requirements.txt
-- pip install -q Django==$DJANGO_VERSION
-- python setup.py -q install
 before_script: 
 - cp local_settings.example.py local_settings.py
 - psql -c "create user decide with password 'decide'"
